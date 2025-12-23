@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aeli Rentals – Chiang Mai Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-o9N1j7kGStbVQnC6dKX0rH6MZ7YdZLkNn6N+4p4d8Gk="
+    crossorigin=""
+  />
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #f9f7f2;
+    }
+
+    header {
+      padding: 14px 20px;
+      background: #2c2c2c;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+    }
+
+    #map {
+      height: calc(100vh - 52px);
+      width: 100%;
+    }
+
+    .leaflet-container img {
+      max-width: none !important;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  Aeli Rentals — Chiang Mai Property Map
+</header>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-oD4Gv3S9nZ0l5KpP4Y+o0yE5sZ8J8Qq9r1r8n4bM1A8="
+  crossorigin=""
+></script>
+
+<script>
+  // Initialize map
+  const map = L.map('map', {
+    zoomControl: true,
+    scrollWheelZoom: true
+  }).setView([18.7883, 98.9853], 13);
+
+  // Tile layer
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Property locations (EDIT THESE)
+  const locations = [
+    {
+      name: "Old City Apartment",
+      lat: 18.7877,
+      lng: 98.9931,
+      price: "฿11,000 / month"
+    },
+    {
+      name: "Nimman Condo",
+      lat: 18.7969,
+      lng: 98.9684,
+      price: "฿15,000 / month"
+    },
+    {
+      name: "Maya Area Studio",
+      lat: 18.8024,
+      lng: 98.9671,
+      price: "฿13,500 / month"
+    },
+    {
+      name: "Airport Residence",
+      lat: 18.7668,
+      lng: 98.9626,
+      price: "฿9,500 / month"
+    }
+  ];
+
+  // Custom marker style
+  const goldIcon = L.divIcon({
+    className: '',
+    html: `
+      <div style="
+        background:#c5a059;
+        width:28px;
+        height:28px;
+        border-radius:50%;
+        border:3px solid white;
+        box-shadow:0 3px 10px rgba(0,0,0,0.3);
+      "></div>
+    `,
+    iconSize: [28, 28],
+    iconAnchor: [14, 28]
+  });
+
+  // Add markers
+  locations.forEach(loc => {
+    L.marker([loc.lat, loc.lng], { icon: goldIcon })
+      .addTo(map)
+      .bindPopup(`
+        <strong>${loc.name}</strong><br>
+        ${loc.price}
+      `);
+  });
+</script>
+
+</body>
+</html>
