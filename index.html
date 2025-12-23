@@ -1,78 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Aeli Rentals – Chiang Mai Map</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Map Test</title>
 
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
-    html, body {
+    html, body, #map {
       height: 100%;
       margin: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    header {
-      height: 52px;
-      background: #2c2c2c;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      font-weight: bold;
-    }
-
-    #map {
-      height: calc(100vh - 52px);
-      width: 100%;
-    }
-
-    /* IMPORTANT: prevents broken tiles */
-    .leaflet-container img {
-      max-width: none !important;
     }
   </style>
 </head>
 <body>
 
-<header>
-  Aeli Rentals — Chiang Mai Property Map
-</header>
-
 <div id="map"></div>
 
-<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
-  // Initialize map
-  const map = L.map('map').setView([18.7883, 98.9853], 13);
+  alert("JS is running");
 
-  // Tile layer
+  var map = L.map('map').setView([18.7883, 98.9853], 13);
+
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
+    attribution: '© OpenStreetMap'
   }).addTo(map);
 
-  // Fixed property locations
-  const locations = [
-    { name: "Old City Apartment", lat: 18.7877, lng: 98.9931 },
-    { name: "Nimman Condo", lat: 18.7969, lng: 98.9684 },
-    { name: "Maya Area Studio", lat: 18.8024, lng: 98.9671 },
-    { name: "Airport Residence", lat: 18.7668, lng: 98.9626 }
-  ];
-
-  // Add markers
-  locations.forEach(loc => {
-    L.marker([loc.lat, loc.lng])
-      .addTo(map)
-      .bindPopup(`<strong>${loc.name}</strong>`);
-  });
+  L.marker([18.7883, 98.9853]).addTo(map)
+    .bindPopup("Chiang Mai")
+    .openPopup();
 </script>
 
 </body>
