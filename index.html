@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chiang Mai Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #map {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+  function initMap() {
+    // Center of Chiang Mai
+    const chiangMai = { lat: 18.7883, lng: 98.9853 };
+
+    // Create the map
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 13,
+      center: chiangMai,
+    });
+
+    // Example locations
+    const locations = [
+      {
+        position: { lat: 18.7883, lng: 98.9853 },
+        title: "Chiang Mai Old City"
+      },
+      {
+        position: { lat: 18.7962, lng: 98.9793 },
+        title: "Wat Phra Singh"
+      },
+      {
+        position: { lat: 18.8049, lng: 98.9953 },
+        title: "Nimmanhaemin Road"
+      },
+      {
+        position: { lat: 18.7906, lng: 98.9936 },
+        title: "Tha Phae Gate"
+      }
+    ];
+
+    // Add markers
+    locations.forEach(location => {
+      new google.maps.Marker({
+        position: location.position,
+        map: map,
+        title: location.title
+      });
+    });
+  }
+</script>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&callback=initMap"
+  async
+  defer>
+</script>
+
+</body>
+</html>
